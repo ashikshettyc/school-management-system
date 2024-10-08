@@ -1,50 +1,48 @@
-import Pagination from "@/components/Pagination";
-import Table from "@/components/Table";
-import TableSearch from "@/components/TableSearch";
-import {
-    eventsData,
-  role,
-} from "@/lib/data";
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
+import FormModal from '@/components/FormModal';
+import Pagination from '@/components/Pagination';
+import Table from '@/components/Table';
+import TableSearch from '@/components/TableSearch';
+import { eventsData, role } from '@/lib/data';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
 
 type Events = {
   id: number;
   title: string;
   class: string;
   date: string;
-  startTime:string;
-  endTime:string;
+  startTime: string;
+  endTime: string;
 };
 
 const columns = [
   {
-    header: "Title",
-    accessor: "title",
+    header: 'Title',
+    accessor: 'title',
   },
   {
-    header: "Class",
-    accessor: "class",
+    header: 'Class',
+    accessor: 'class',
   },
   {
-    header: "Date",
-    accessor: "date",
-    className: "hidden md:table-cell",
+    header: 'Date',
+    accessor: 'date',
+    className: 'hidden md:table-cell',
   },
   {
-    header: "Start Time",
-    accessor: "starttime",
-    className: "hidden md:table-cell",
+    header: 'Start Time',
+    accessor: 'starttime',
+    className: 'hidden md:table-cell',
   },
   {
-    header: "End Time",
-    accessor: "endtime",
-    className: "hidden md:table-cell",
+    header: 'End Time',
+    accessor: 'endtime',
+    className: 'hidden md:table-cell',
   },
   {
-    header: "Action",
-    accessor: "action",
+    header: 'Action',
+    accessor: 'action',
   },
 ];
 function EventsListpage() {
@@ -57,15 +55,19 @@ function EventsListpage() {
       <td className="hidden md:table-cell">{item.endTime}</td>
       <td>
         <div className="flex items-center gap-2">
-          <Link href={`/list/teachers/${item.id}`}>
+          {/* <Link href={`/list/teachers/${item.id}`}>
             <button className="w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky">
               <Image src="/edit.png" width={16} height={16} alt="" />
             </button>
-          </Link>
-          {role === "admin" && (
-            <button className="w-7 h-7 flex items-center justify-center rounded-full bg-lamaPurple">
-              <Image src="/delete.png" width={16} height={16} alt="" />
-            </button>
+          </Link> */}
+          {role === 'admin' && (
+            // <button className="w-7 h-7 flex items-center justify-center rounded-full bg-lamaPurple">
+            //   <Image src="/delete.png" width={16} height={16} alt="" />
+            // </button>
+            <>
+              <FormModal table="event" type="update" data={item} />
+              <FormModal table="event" type="delete" id={item.id} />
+            </>
           )}
         </div>
       </td>
@@ -85,10 +87,11 @@ function EventsListpage() {
             <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
-            {role === "admin" && (
-              <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
-                <Image src="/plus.png" alt="" width={14} height={14} />
-              </button>
+            {role === 'admin' && (
+              // <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
+              //   <Image src="/plus.png" alt="" width={14} height={14} />
+              // </button>
+              <FormModal table="event" type="create" />
             )}
           </div>
         </div>

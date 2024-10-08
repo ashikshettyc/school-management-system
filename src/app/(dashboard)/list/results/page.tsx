@@ -1,58 +1,55 @@
-import Pagination from "@/components/Pagination";
-import Table from "@/components/Table";
-import TableSearch from "@/components/TableSearch";
-import {
-    assignmentsData,
-  resultsData,
-  role,
-} from "@/lib/data";
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
+import FormModal from '@/components/FormModal';
+import Pagination from '@/components/Pagination';
+import Table from '@/components/Table';
+import TableSearch from '@/components/TableSearch';
+import { assignmentsData, resultsData, role } from '@/lib/data';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
 
 type Result = {
   id: number;
   subject: string;
   class: string;
   teacher: string;
-  student:string;
-  type: "exam" | "assignment";
-  date:string;
-  score:number;
+  student: string;
+  type: 'exam' | 'assignment';
+  date: string;
+  score: number;
 };
 
 const columns = [
   {
-    header: "Subject Name",
-    accessor: "name",
+    header: 'Subject Name',
+    accessor: 'name',
   },
   {
-    header: "Student",
-    accessor: "student",
+    header: 'Student',
+    accessor: 'student',
   },
   {
-    header: "Score",
-    accessor: "score",
-    className: "hidden md:table-cell",
+    header: 'Score',
+    accessor: 'score',
+    className: 'hidden md:table-cell',
   },
   {
-    header: "Teacher",
-    accessor: "teacher",
-    className: "hidden md:table-cell",
+    header: 'Teacher',
+    accessor: 'teacher',
+    className: 'hidden md:table-cell',
   },
   {
-    header: "Class",
-    accessor: "class",
-    className: "hidden md:table-cell",
+    header: 'Class',
+    accessor: 'class',
+    className: 'hidden md:table-cell',
   },
   {
-    header: "Date",
-    accessor: "date",
-    className: "hidden md:table-cell",
+    header: 'Date',
+    accessor: 'date',
+    className: 'hidden md:table-cell',
   },
   {
-    header: "Action",
-    accessor: "action",
+    header: 'Action',
+    accessor: 'action',
   },
 ];
 function ResultListpage() {
@@ -66,15 +63,19 @@ function ResultListpage() {
       <td className="hidden md:table-cell">{item.date}</td>
       <td>
         <div className="flex items-center gap-2">
-          <Link href={`/list/teachers/${item.id}`}>
+          {/* <Link href={`/list/teachers/${item.id}`}>
             <button className="w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky">
               <Image src="/edit.png" width={16} height={16} alt="" />
             </button>
-          </Link>
-          {role === "admin" && (
-            <button className="w-7 h-7 flex items-center justify-center rounded-full bg-lamaPurple">
-              <Image src="/delete.png" width={16} height={16} alt="" />
-            </button>
+          </Link> */}
+          {role === 'admin' && (
+            // <button className="w-7 h-7 flex items-center justify-center rounded-full bg-lamaPurple">
+            //   <Image src="/delete.png" width={16} height={16} alt="" />
+            // </button>
+            <>
+              <FormModal table="result" type="update" data={item} />
+              <FormModal table="result" type="delete" id={item.id} />
+            </>
           )}
         </div>
       </td>
@@ -94,10 +95,11 @@ function ResultListpage() {
             <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
-            {role === "admin" && (
-              <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
-                <Image src="/plus.png" alt="" width={14} height={14} />
-              </button>
+            {role === 'admin' && (
+              // <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
+              //   <Image src="/plus.png" alt="" width={14} height={14} />
+              // </button>
+              <FormModal table="result" type="create" />
             )}
           </div>
         </div>

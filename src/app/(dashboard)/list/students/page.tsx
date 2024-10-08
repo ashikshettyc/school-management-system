@@ -1,10 +1,11 @@
-import Pagination from "@/components/Pagination";
-import Table from "@/components/Table";
-import TableSearch from "@/components/TableSearch";
-import { role, studentsData } from "@/lib/data";
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
+import FormModal from '@/components/FormModal';
+import Pagination from '@/components/Pagination';
+import Table from '@/components/Table';
+import TableSearch from '@/components/TableSearch';
+import { role, studentsData } from '@/lib/data';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
 
 type Student = {
   id: number;
@@ -20,32 +21,32 @@ type Student = {
 
 const columns = [
   {
-    header: "Info",
-    accessor: "info",
+    header: 'Info',
+    accessor: 'info',
   },
   {
-    header: "Student ID",
-    accessor: "studentId",
-    className: "hidden md:table-cell",
+    header: 'Student ID',
+    accessor: 'studentId',
+    className: 'hidden md:table-cell',
   },
   {
-    header: "Grade",
-    accessor: "grade",
-    className: "hidden md:table-cell",
+    header: 'Grade',
+    accessor: 'grade',
+    className: 'hidden md:table-cell',
   },
   {
-    header: "Phone",
-    accessor: "phone",
-    className: "hidden md:table-cell",
-  },
-    {
-    header: "Address",
-    accessor: "address",
-    className: "hidden md:table-cell",
+    header: 'Phone',
+    accessor: 'phone',
+    className: 'hidden md:table-cell',
   },
   {
-    header: "Action",
-    accessor: "action",
+    header: 'Address',
+    accessor: 'address',
+    className: 'hidden md:table-cell',
+  },
+  {
+    header: 'Action',
+    accessor: 'action',
   },
 ];
 function StudentListpage() {
@@ -75,10 +76,11 @@ function StudentListpage() {
               <Image src="/view.png" width={16} height={16} alt="" />
             </button>
           </Link>
-          {role === "admin" && (
-            <button className="w-7 h-7 flex items-center justify-center rounded-full bg-lamaPurple">
-              <Image src="/delete.png" width={16} height={16} alt="" />
-            </button>
+          {role === 'admin' && (
+            // <button className="w-7 h-7 flex items-center justify-center rounded-full bg-lamaPurple">
+            //   <Image src="/delete.png" width={16} height={16} alt="" />
+            // </button>
+            <FormModal table="student" type="delete" id={item.id} />
           )}
         </div>
       </td>
@@ -98,14 +100,12 @@ function StudentListpage() {
             <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
-            {
-            role === "admin" &&
-            (
-              <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
-              <Image src="/plus.png" alt="" width={14} height={14} />
-            </button>
-            )
-           }
+            {role === 'admin' && (
+              // <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
+              //   <Image src="/plus.png" alt="" width={14} height={14} />
+              // </button>
+              <FormModal table="student" type="create" />
+            )}
           </div>
         </div>
       </div>
